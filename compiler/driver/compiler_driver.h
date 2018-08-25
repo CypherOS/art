@@ -17,7 +17,6 @@
 #ifndef ART_COMPILER_DRIVER_COMPILER_DRIVER_H_
 #define ART_COMPILER_DRIVER_COMPILER_DRIVER_H_
 
-#include <atomic>
 #include <set>
 #include <string>
 #include <unordered_set>
@@ -338,13 +337,6 @@ class CompilerDriver {
   // Get memory usage during compilation.
   std::string GetMemoryUsageString(bool extended) const;
 
-  void SetHadHardVerifierFailure() {
-    had_hard_verifier_failure_ = true;
-  }
-  void AddSoftVerifierFailure() {
-    number_of_soft_verifier_failures_++;
-  }
-
   Compiler::Kind GetCompilerKind() {
     return compiler_kind_;
   }
@@ -509,9 +501,6 @@ class CompilerDriver {
   // all methods are eligible for compilation (compilation filters etc. will still apply).
   // This option may be restricted to the boot image, depending on a flag in the implementation.
   std::unique_ptr<std::unordered_set<std::string>> methods_to_compile_;
-
-  std::atomic<uint32_t> number_of_soft_verifier_failures_;
-  bool had_hard_verifier_failure_;
 
   // A thread pool that can (potentially) run tasks in parallel.
   std::unique_ptr<ThreadPool> parallel_thread_pool_;

@@ -223,13 +223,6 @@ class CompilerOptions FINAL {
     return init_failure_output_.get();
   }
 
-  bool AbortOnHardVerifierFailure() const {
-    return abort_on_hard_verifier_failure_;
-  }
-  bool AbortOnSoftVerifierFailure() const {
-    return abort_on_soft_verifier_failure_;
-  }
-
   const std::vector<const DexFile*>* GetNoInlineFromDexFile() const {
     return no_inline_from_;
   }
@@ -320,12 +313,6 @@ class CompilerOptions FINAL {
 
   // Vector of methods to have verbose output enabled for.
   std::vector<std::string> verbose_methods_;
-
-  // Abort compilation with an error if we find a class that fails verification with a hard
-  // failure.
-  bool abort_on_hard_verifier_failure_;
-  // Same for soft failures.
-  bool abort_on_soft_verifier_failure_;
 
   // Log initialization of initialization failures to this stream if not null.
   std::unique_ptr<std::ostream> init_failure_output_;
